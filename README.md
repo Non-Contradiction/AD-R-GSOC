@@ -77,7 +77,7 @@ Students, please do one or more of the following tests before contacting the men
   R6 object in `Rcpp`.
   For this test, write an `Rcpp` function to return the type string of a `JuliaObject`.
 
-# Solutions of tests
+## Solutions of tests
 
 Students, please post a link to your test results here.
 

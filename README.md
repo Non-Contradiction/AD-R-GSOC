@@ -48,17 +48,7 @@ The project is expected to lead to an R wrapper for `Julia`'s AD packages
 
 ## Mentors
 
-Students, please contact mentors below after completing at least one of the tests below.
-
-MENTORS: fill in this part. each project needs 2 mentors. One should be an expert R programmer with previous package
-development experience, and the other can be a domain expert in some other field or application area
-(optimization, bioinformatics, machine learning, data viz, etc).
-Ideally one of the two mentors should have previous experience with GSOC (either as a student or mentor).
-Please provide contact info for each mentor, along with qualifications. Example:
-
-* Toby Hocking <toby.hocking@r-project.org> is the author of R packages X and Y.
-* Other Dev <other.dev@gmail.com> is an expert in machine learning,
-  and has previous GSOC experience with NAME_OF_OPEN_SOURCE_ORGANIZATION in 2015-2016.
+Mentors are needed
 
 ## Tests
 

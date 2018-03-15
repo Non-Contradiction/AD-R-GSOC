@@ -1,0 +1,62 @@
+---
+title: "Test for Automatic Differentiation in R through Julia"
+author: "Changcheng Li"
+output:
+  html_document:
+    keep_md: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Test 1
+
+```{julia}
+using ForwardDiff
+
+f(x::Vector) = sum(sin, x) + sum(sqrt, x)
+g = x -> ForwardDiff.gradient(f, x)
+h = x -> ForwardDiff.hessian(f, x)
+
+g([1.,1.,1.,1.,1.])
+h([1.,1.,1.,1.,1.])
+```
+
+## Test 2
+
+```{r}
+library(JuliaCall)
+julia_setup()
+julia_library("ForwardDiff")
+
+f <- function(x) {sum(sin(x)) + sum(sqrt(x))}
+g <- function(x) julia_call("ForwardDiff.gradient", f, x)
+h <- function(x) julia_call("ForwardDiff.hessian", f, x)
+
+g(rep(1, 5))
+h(rep(1, 5))
+```
+
+## Test 3
+```{r}
+julia_command("function julia_type(x) string(typeof(x)) end")
+```
+```{Rcpp}
+#include <Rcpp.h>
+using namespace Rcpp;
+
+// [[Rcpp::export]]
+String julia_type(Environment x) {
+    if (!x.inherits("JuliaObject")) stop("Input must be a JuliaObject.");
+    Environment julia("package:JuliaCall"); Function jcall = julia["julia_call"];
+    return jcall("julia_type", x);
+}
+```
+
+```{r}
+julia_type(JuliaObject(1L))
+julia_type(JuliaObject(1))
+julia_type(JuliaObject(1:10))
+julia_type(JuliaObject(rnorm(10)))
+```

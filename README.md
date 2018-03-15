@@ -80,3 +80,7 @@ Students, please do one or more of the following tests before contacting the men
 # Solutions of tests
 
 Students, please post a link to your test results here.
+
+Name: Changcheng Li
+Email: cxl508@psu.edu, lch34677@gmail.com
+Solution: https://github.com/Non-Contradiction/AD-R-GSOC/blob/master/Test.md

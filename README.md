@@ -39,12 +39,10 @@ automatic differentiation, so a comprehensive test set covering lots of possible
 for automatic differentiation will be written for the project,
 including native `R` functions, `Julia` functions
 through `JuliaCall`, `Rcpp` functions.
-Some original tests in `ForwardDiff.jl`[https://github.com/JuliaDiff/ForwardDiff.jl]
-and `ReverseDiff.jl`[https://github.com/JuliaDiff/ReverseDiff.jl] will be adopted.
-And in the tests, the automatic differentiation results for a (mostly) same function
+In the tests, the automatic differentiation results for a (mostly) same function
 in `Julia`, `R`, and `Rcpp`
 will be checked against each other,
-and the automatic differential results will also be checked against the numerical
+and will also be checked against the numerical
 and symbolic differentiation results by packages like `numDeriv` and `Deriv` for correctness.
 
 There should also be some benchmark tests, which checks the performance of the code

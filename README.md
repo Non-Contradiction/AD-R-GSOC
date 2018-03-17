@@ -32,8 +32,28 @@ in R like [`JuliaCall`](https://github.com/Non-Contradiction/JuliaCall).
   and the functionality is not complete.
 
 ## Details of the coding project
-
 TODO
+### Testing
+Since one of the most important goal of this project is to ensure the correctness of
+automatic differentiation, so a comprehensive test set covering lots of possible functions
+for automatic differentiation will be written for the project,
+including native `R` functions, `Julia` functions
+through `JuliaCall`, `Rcpp` functions.
+Some original tests in `ForwardDiff.jl`[https://github.com/JuliaDiff/ForwardDiff.jl]
+and `ReverseDiff.jl`[https://github.com/JuliaDiff/ReverseDiff.jl] will be adopted.
+And in the tests, the automatic differentiation results for a (mostly) same function
+in `Julia`, `R`, and `Rcpp`
+will be checked against each other,
+and the automatic differential results will also be checked against the numerical
+and symbolic differentiation results by packages like `numDeriv` and `Deriv` for correctness.
+
+There should also be some benchmark tests, which checks the performance of the code
+before/after a certain commit or pull request,
+and compares the performance and with the numerical
+and symbolic differentiation results by packages like `numDeriv` and `Deriv`.
+
+Every important commit or pull request should pass the tests.
+So CI systems will be configured, both on travis CI for mac os and linux, and appveyor for windows.
 
 ## Expected impact
 
@@ -72,5 +92,7 @@ Students, please do one or more of the following tests before contacting the men
 Students, please post a link to your test results here.
 
 Name: Changcheng Li
+
 Email: cxl508@psu.edu, lch34677@gmail.com
+
 Solution: https://github.com/Non-Contradiction/AD-R-GSOC/blob/master/Test.md

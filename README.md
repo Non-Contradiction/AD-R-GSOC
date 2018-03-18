@@ -30,6 +30,8 @@ in R like [`JuliaCall`](https://github.com/Non-Contradiction/JuliaCall).
 * R package [`radx`](https://github.com/quantumelixir/radx/) for automatic differentiation,
   but it imposes restrictions on the functions that can be dealt with,
   and the functionality is not complete.
+* R package [`nlsr`](https://cran.r-project.org/web/packages/nlsr/index.html)
+  which is a nonlinear least squares problems with some symbolic derivative features.
 
 ## Details of the coding project
 TODO

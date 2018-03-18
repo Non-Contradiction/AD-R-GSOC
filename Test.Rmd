@@ -60,3 +60,73 @@ julia_type(JuliaObject(1))
 julia_type(JuliaObject(1:10))
 julia_type(JuliaObject(rnorm(10)))
 ```
+
+## Some Additional Results
+
+In this additional test, I expand the result in the above test to make a simple `Rcpp` class as a wrapper for `JuliaObject`, I define some conversion function following the vignette of ["Rcpp Extending"](https://cran.r-project.org/web/packages/Rcpp/vignettes/Rcpp-extending.pdf).
+And I create an overloaded function `sqrt` for `JuliaObject` in `Rcpp`.
+The `Rcpp` function calls the `R` function to accomplish the overloading currently.
+A function `fn` is defined based on the overloaded `sqrt`.
+
+```{Rcpp}
+#include <RcppCommon.h>
+
+class JuliaObject{
+public:
+    SEXP x;
+    JuliaObject();
+    JuliaObject(SEXP);
+    operator SEXP();
+};
+
+#include <Rcpp.h>
+using namespace Rcpp;
+
+JuliaObject::JuliaObject(SEXP x1){
+    if (!Environment(x1).inherits("JuliaObject")) stop("Input must be a JuliaObject.");
+    x = x1;
+};
+
+SEXP wrap(JuliaObject j){
+    return SEXP(j.x);
+}
+
+// [[Rcpp::export]]
+String julia_type(JuliaObject x) {
+    Environment julia("package:JuliaCall"); Function jcall = julia["julia_call"];
+    return jcall("julia_type", x);
+}
+
+JuliaObject sqrt(JuliaObject j){
+    Environment julia("package:JuliaCall"); Function jcall = julia["julia_call"];
+    return jcall("JuliaCall.JuliaObject", jcall("sqrt", j));
+}
+
+NumericVector _fn(NumericVector x){
+    return sqrt(x);
+}
+
+JuliaObject _fn(JuliaObject x){
+    return sqrt(x);
+}
+
+// [[Rcpp::export]]
+SEXP fn(SEXP x){
+    if (TYPEOF(x) == ENVSXP){
+        JuliaObject tmp = JuliaObject(x);
+        return wrap(_fn(tmp));
+    }
+    else if(TYPEOF(x) == REALSXP){
+            NumericVector tmp = NumericVector(x);
+            return wrap(_fn(tmp));
+            }
+    else{
+        stop("Input is not supported.");
+    }
+}
+```
+
+```{r}
+fn(42)
+fn(JuliaObject(42))
+```

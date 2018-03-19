@@ -193,11 +193,16 @@ JuliaObject sqrt(JuliaObject j){
     return jcall("JuliaCall.JuliaObject", jcall("sqrt", j));
 }
 
-NumericVector _fn(NumericVector x){
-    return sqrt(x);
-}
+// NumericVector _fn(NumericVector x){
+//     return sqrt(x);
+// }
+//
+// JuliaObject _fn(JuliaObject x){
+//     return sqrt(x);
+// }
 
-JuliaObject _fn(JuliaObject x){
+template <typename T>
+T _fn(T x){
     return sqrt(x);
 }
 

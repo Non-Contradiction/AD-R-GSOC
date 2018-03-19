@@ -68,7 +68,9 @@ The project is expected to lead to an R wrapper for `Julia`'s AD packages
 
 ## Mentors
 
-Mentors are needed
+Erin Hodgess
+
+John Nash
 
 ## Tests
 
